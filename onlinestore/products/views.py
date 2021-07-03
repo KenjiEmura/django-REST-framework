@@ -15,6 +15,14 @@ from django.http import JsonResponse
 from .models import Product, Manufacturer
 
 
+def manufacturer_list(request):
+    manufacturers = Manufacturer.objects.all()
+    data = {"manufacturers": list(manufacturers.values(
+        "pk", "name", "location", "active"))}
+    response = JsonResponse(data)
+    return response
+
+
 def product_list(request):
     products = Product.objects.all()  # We can also get a slice [:30]
 
